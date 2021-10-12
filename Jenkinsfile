@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Push') {
             steps {
-                sh "docker push 32322323/javademo:latest"
+                sh "docker push 32322323/javaapp:latest"
             }
         }
     }
