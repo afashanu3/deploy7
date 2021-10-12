@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps { 
-                sh "docker build -t 32322323/javademo ."
+                sh "docker build -t javaapp ."
             }
         }
         stage('Login') {
