@@ -11,11 +11,19 @@
 - Issues
 
 
+# AWS
+
+* ECR
+
+Create a repository
+
+
+After the repository is created, select the repository that you created and select view push commands. 
+Then add the commands into terminal to push image onto AWS ECR.
+
 # Docker Commands
 
-Within terminal create image and connect it ECS and push it to AWS
-
-Using these commands found located in push commands tab
+In the terminal create the image and connect it to ECS and push it to AWS using these commands found located in push commands tab.
 
 ```
 aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/--------
@@ -26,94 +34,77 @@ docker push public.ecr.aws/--------/jenkins:latest
 ```
 
 
-
-
-
-Create a repository
-
-
-After repository is created 
-Select repository and select view push commands 
-Add commands into terminal to push image onto aws ECS
+* EC2
 
 ![image](https://user-images.githubusercontent.com/84725239/137370150-5c98989d-c8db-47a9-a0d5-c1ed06868a00.png)
 
-After creating a ubuntu instance 
+After creating a ubuntu instance, next it was time to enter terminal and go to the folder with key
+then ssh.
 
-Next enter terminal and go to folder with key
-Then
--ssh -i newkey.pem.txt ubuntu@100.26.202.255
+```
+-ssh -i newkey.pem.txt ubuntu@(public ip address given)
+```
+
+* ECS
+
+First go to the ECS and create a cluster.
 
 
-￼![Screen Shot 2021-10-13 at 9 09 57 AM](https://user-images.githubusercontent.com/84725239/137374723-9f735a32-c650-4524-838d-f37e58e6c650.png)
+![Screen Shot 2021-10-13 at 9 08 22 AM](https://user-images.githubusercontent.com/84725239/137502638-ea949893-533a-4c00-b74d-bbb55f1c3c21.png)
 
-First go to the ECS and create a cluster
 
-￼
-
-Networking only will be the first tab selected 
-Give this cluster a name and didn’t configure a vpc(used default)
+Networking only will be the first tab selected only thing given to this cluster was a name the vpc the default was used.
 
 ![Screen Shot 2021-10-13 at 9 09 03 AM](https://user-images.githubusercontent.com/84725239/137374803-79523cc7-7afe-405e-917a-47daf27121cb.png)
 
 ![Screen Shot 2021-10-13 at 9 08 55 AM](https://user-images.githubusercontent.com/84725239/137374822-0e169f37-0394-4dd7-95a5-7074176b8549.png)
 
-￼
-￼
+
 Next go to the task definition tab and create a new task definition and select Fargate
 
 
 ![Screen Shot 2021-10-13 at 9 09 37 AM](https://user-images.githubusercontent.com/84725239/137374790-3c84a144-9510-49f2-8b8f-fc4a680557df.png)
 
 
-Then after creating the task definition
+When creating the task definition, these were the specific configurations needed
 
 
-These were the specific configurations needed
-
-
-Task role selected ECStaskExecutionRole
+Task role 
+- selected ECStaskExecutionRole
 
 Task size
-Task memory (GB)
-4GB
+-Task memory (GB) 4GB
+-Task CPU (vCPU) 1vCPU
 
-Task CPU (vCPU)
-1vCPU
-
-Container definitions
-Add container
+Under Container definitions
+-Click on add a container
 
 In image box get from repository the 
-repository-url/image:tag
+repository-url/image:tag (should look something like this public.ecr.aws/--------/jenkins:latest , found in ECR)
 
 Port mappings
-8080 tcp
-After task definition is created use the Public ip and attach it to :8080 to get into jenkins
+-8080 tcp
+After task definition is created use the Public ip and attach it to :8080 to get into jenkins.
 
-Password to jenkins will be in the logs of the cluster 
+The password needed to access jenkins will be in the logs of the cluster.
 
-Download recommended plugins and 
+# Jenkins
 
 - Docker pipeline plugin
 
 - AWS EC2 plugin
 
+Input Credentials For Docker, Ubuntu instance, and Github.Download recommended plugins and also download these plugins for this specific deployment.
+
 
 ![Screen Shot 2021-10-11 at 11 41 09 PM](https://user-images.githubusercontent.com/84725239/137374956-e692f2be-2ee8-455c-b809-2982d43a2f25.png)
 
 
-
-Input Credentials 
-
-For Docker 
-
-Ubuntu SSH
-
-Github (personal token needed)
-
+Configure Jenkins agent
+After assigning label remember to given to agent to jenkinsfile on github
 
 Within the folder that contains the snapshot
+
 Drag file to GitHub demo-0.0.1-SNAPSHOT.jar 
 
 # Ubuntu
@@ -150,9 +141,9 @@ In ubuntu vm instance
 
 -curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
--sudo add-apt-repository \ "deb [arch=amd64] https://download.docker.com/linux/ubuntu \ $(lsb_release -cs) \ stable"
+-sudo add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu \$(lsb_release -cs) \stable"
 
--sudo apt update 
+-sudo apt update
 
 -sudo apt install docker-ce docker-ce-cli containerd.io
 
@@ -171,5 +162,6 @@ Successful test
 ![Screen Shot 2021-10-11 at 11 37 55 PM](https://user-images.githubusercontent.com/84725239/137375104-ea192c64-b822-4910-8e00-ba472fd5547b.png)
 ![Screen Shot 2021-10-14 at 2 30 17 PM](https://user-images.githubusercontent.com/84725239/137375458-30dbb911-362a-45c8-b702-d3ecba76e8ab.png)
 
+#Issues
 
 Test was broken to see how certain aspects of code work 
