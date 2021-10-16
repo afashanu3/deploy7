@@ -100,12 +100,7 @@ Input Credentials For Docker, Ubuntu instance, and Github.Download recommended p
 ![Screen Shot 2021-10-11 at 11 41 09 PM](https://user-images.githubusercontent.com/84725239/137374956-e692f2be-2ee8-455c-b809-2982d43a2f25.png)
 
 
-Configure Jenkins agent
-After assigning label remember to given to agent to jenkinsfile on github
-
-Within the folder that contains the snapshot
-
-Drag file to GitHub demo-0.0.1-SNAPSHOT.jar 
+Configure Jenkins agent, then a Multibranch Pipeline. After assigning label remember to given to agent to jenkinsfile on github.
 
 # Ubuntu
 
@@ -149,16 +144,20 @@ In ubuntu vm instance
 
 ```
 
-# Jenkins
+# Github
  
-Configure Jenkins agent
-After assign label given to agent to jenkinsfile on github
+* Within the folder that contains the snapshot
+- Drag file to GitHub demo-0.0.1-SNAPSHOT.jar 
+* After assigning label given to agent in jenkins, add it to jenkinsfile on github
 Within Jenkinsfile add commands 
-Multibranch pipeline 
-Build 
-Successful test 
 
-
+```
+"docker build -t javaapp ."
+"docker tag javaapp:latest 32322323/javaapp"
+sh "docker push 32322323/javaapp:latest" ```
+  
+ These commands allow for the Build to run successfully as well as the image to be pushed to DockerHub
+                
 ![Screen Shot 2021-10-11 at 11 37 55 PM](https://user-images.githubusercontent.com/84725239/137375104-ea192c64-b822-4910-8e00-ba472fd5547b.png)
 ![Screen Shot 2021-10-14 at 2 30 17 PM](https://user-images.githubusercontent.com/84725239/137375458-30dbb911-362a-45c8-b702-d3ecba76e8ab.png)
 
