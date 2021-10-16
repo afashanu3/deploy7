@@ -73,20 +73,20 @@ Task role
 - selected ECStaskExecutionRole
 
 Task size
--Task memory (GB) 4GB
--Task CPU (vCPU) 1vCPU
+- Task memory (GB) 4GB
+- Task CPU (vCPU) 1vCPU
 
-Under Container definitions
--Click on add a container
+Container definitions
+- Click on add a container
 
-In image box get from repository the 
-repository-url/image:tag (should look something like this public.ecr.aws/--------/jenkins:latest , found in ECR)
+In image box get from repository the repository-url/image:tag (should look something like this public.ecr.aws/--------/jenkins:latest , found in ECR)
 
 Port mappings
--8080 tcp
+- 8080 tcp
+
 After task definition is created use the Public ip and attach it to :8080 to get into jenkins.
 
-The password needed to access jenkins will be in the logs of the cluster.
+The password is needed to access jenkins, it will be in the logs of the cluster.
 
 # Jenkins
 
@@ -100,7 +100,7 @@ Input Credentials For Docker, Ubuntu instance, and Github.Download recommended p
 ![Screen Shot 2021-10-11 at 11 41 09 PM](https://user-images.githubusercontent.com/84725239/137374956-e692f2be-2ee8-455c-b809-2982d43a2f25.png)
 
 
-Configure Jenkins agent, then a Multibranch Pipeline. After assigning label remember to given to agent to jenkinsfile on github.
+Configure Jenkins agent, then a Multibranch Pipeline. After assigning label remember to add to label to jenkinsfile on github.
 
 # Ubuntu
 
